@@ -25,8 +25,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Always show number input spinners */
+/* Always show up/down stepper arrows on number inputs */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   opacity: 1;
+}
+input[type="number"] {
+  -moz-appearance: number-input;
 }

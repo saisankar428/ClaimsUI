@@ -16,9 +16,9 @@ export default function Pagination({
   onRowsPerPageChange,
 }: Props) {
   return (
-    <div className="flex items-center justify-between pt-3 px-1 border-t border-gray-100 mt-2">
-      
-      {/* Left: Rows per page */}
+    <div className="flex items-center justify-between pt-3 px-1 border-t border-gray-100 mt-2 shrink-0">
+
+      {/* Left: Rows per page — number input with visible up/down stepper */}
       <div className="flex items-center gap-2 text-sm text-gray-600">
         <span className="whitespace-nowrap">Rows per page</span>
         <input
@@ -27,11 +27,12 @@ export default function Pagination({
           max={100}
           step={5}
           value={rowsPerPage}
-          onChange={(e) => onRowsPerPageChange?.(Number(e.target.value))}
-          className="w-16 border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-700 text-center
-                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                     [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-auto
-                     [&::-webkit-inner-spin-button]:appearance-auto"
+          onChange={(e) => {
+            const val = Number(e.target.value);
+            if (val >= 5 && val <= 100) onRowsPerPageChange?.(val);
+          }}
+          className="w-14 border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-700 text-center
+                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
 
