@@ -9,7 +9,7 @@ export default function ClaimsNavbar() {
 
   return (
     <div className="w-full bg-white px-4 py-3 sm:px-6 border-b">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-row items-center justify-between">
 
         {/* Left: Title */}
         <div className="text-xl font-semibold text-slate-900">
