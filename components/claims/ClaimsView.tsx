@@ -41,7 +41,6 @@ export default function ClaimsView() {
 
   return (
     <div className="flex flex-col flex-1 mx-5 my-5 gap-4">
-
       {/* Filters — outside and above the white card */}
       <ClaimsFilters onChange={handleFilterChange} />
 
@@ -52,43 +51,23 @@ export default function ClaimsView() {
           (loading / empty / error / data), so the Pagination below never
           shifts position.
         */}
-        <div className="flex-1 min-h-0 overflow-auto">
 
+        {/* Count will replace with actual */}
+        <p className="text-sm text-gray-600 mb-3">
+          Showing <span className="font-semibold text-black">{"Start"}</span>
+          <span className="font-semibold text-black">{"-"}</span>
+          <span className="font-semibold text-black">{"End"}</span> of{" "}
+          <span className="font-semibold text-black">{"TotalCount"}</span>{" "}
+          claims
+        </p>
+        <div className="flex-1 min-h-0 overflow-auto">
           {loading && <ClaimsTableSkeleton />}
 
-          {error && (
-            <ClaimsErrorState message={error} onRetry={retry} />
-          )}
+          {error && <ClaimsErrorState message={error} onRetry={retry} />}
 
           {isEmpty && <ClaimsEmptyState />}
 
-          {showTable && (
-            <table className="w-full text-left">
-              <thead className="text-sm text-gray-500 border-b sticky top-0 bg-white">
-                <tr>
-                  <th className="py-2 pr-4 font-medium">Claim ID</th>
-                  <th className="pr-4 font-medium">SCCF</th>
-                  <th className="pr-4 font-medium">Employer</th>
-                  <th className="pr-4 font-medium">LOB</th>
-                  <th className="pr-4 font-medium">Date</th>
-                  <th className="font-medium">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.items.map((item) => (
-                  <tr key={item.id} className="border-b hover:bg-gray-50">
-                    <td className="py-3 pr-4 text-sm">{item.id}</td>
-                    <td className="pr-4 text-sm text-gray-500">{item.sccfNumber}</td>
-                    <td className="pr-4 text-sm">{item.employerGroup}</td>
-                    <td className="pr-4 text-sm">{item.lob}</td>
-                    <td className="pr-4 text-sm">{item.dateReceived}</td>
-                    <td className="text-sm">{item.status}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-
+          {showTable && <ClaimsTable data={data.items} />}
         </div>
 
         {/* Pagination — always anchored to bottom of card, never shifts */}
