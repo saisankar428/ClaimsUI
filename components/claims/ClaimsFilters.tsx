@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ClaimsFilterValues } from "@/types/claims";
 import { LOB_OPTIONS } from "@/constants/claims";
 
@@ -12,6 +12,18 @@ const STATUS_TABS = ["Active", "Complete"];
 
 export default function ClaimsFilters({ onChange }: Props) {
   const [activeTab, setActiveTab] = useState("Active");
+  const [searchValue, setSearchValue] = useState("");
+  const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    debounceTimer.current = setTimeout(() => {
+      onChange({ search: searchValue });
+    }, 400);
+
+    return () => {
+      if (debounceTimer.current) clearTimeout(debounceTimer.current);
+    };
+  }, [searchValue, onChange]);
 
   return (
     <div className="flex flex-col lg:flex-row lg:items-center gap-4">
@@ -63,7 +75,8 @@ export default function ClaimsFilters({ onChange }: Props) {
           type="text"
           placeholder="Search claim ID or employer group"
           className="w-full border border-gray-200 rounded-lg pl-10 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onChange={(e) => onChange({ search: e.target.value })}
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
       </div>
 
