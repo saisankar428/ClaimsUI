@@ -62,7 +62,7 @@ const ALL_CLAIMS: ClaimItem[] = [
 
 export const useClaims = (params: UseClaimsParams) => {
   const paramsJSON = JSON.stringify(params);
-  const [data, setData] = useState<UseClaimsData>({ items: [], totalPages: 1 });
+  const [data, setData] = useState<UseClaimsData>({ items: [], totalPages: 1 ,totalCount: 0,page: params.page,pageSize: params.limit,});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   // Incrementing this triggers a retry with the same params.
@@ -98,8 +98,9 @@ export const useClaims = (params: UseClaimsParams) => {
         const totalPages = Math.max(1, Math.ceil(filtered.length / params.limit));
         const start = (params.page - 1) * params.limit;
         const items = filtered.slice(start, start + params.limit);
+        const totalCount = filtered.length;
 
-        setData({ items, totalPages });
+        setData({ items, totalPages,totalCount,page: params.page,pageSize: params.limit, });
         setError(null);
         setLoading(false);
       } catch {

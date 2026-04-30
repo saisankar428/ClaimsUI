@@ -20,6 +20,9 @@ export default function ClaimsView() {
   });
 
   const { data, loading, error, retry } = useClaims(params);
+  const { totalCount, page, pageSize } = data;
+  const start = totalCount === 0 ? 0 : (page - 1) * pageSize + 1;
+  const end = Math.min(page * pageSize, totalCount);
 
   // useCallback so child components that receive these as props never re-render
   // solely because the parent re-rendered. All three use the functional setState
@@ -54,10 +57,10 @@ export default function ClaimsView() {
 
         {/* Count will replace with actual */}
         <p className="text-sm text-gray-600 mb-3">
-          Showing <span className="font-semibold text-black">{"Start"}</span>
+          Showing <span className="font-semibold text-black">{start}</span>
           <span className="font-semibold text-black">{"-"}</span>
-          <span className="font-semibold text-black">{"End"}</span> of{" "}
-          <span className="font-semibold text-black">{"TotalCount"}</span>{" "}
+          <span className="font-semibold text-black">{end}</span> of{" "}
+          <span className="font-semibold text-black">{totalCount}</span>{" "}
           claims
         </p>
         <div className="flex-1 min-h-0 overflow-auto">
