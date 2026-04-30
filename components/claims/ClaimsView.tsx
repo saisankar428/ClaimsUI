@@ -23,10 +23,7 @@ export default function ClaimsView() {
   const { totalCount, page, pageSize } = data;
   const start = totalCount === 0 ? 0 : (page - 1) * pageSize + 1;
   const end = Math.min(page * pageSize, totalCount);
-
-  // useCallback so child components that receive these as props never re-render
-  // solely because the parent re-rendered. All three use the functional setState
-  // form, so they have no external dependencies.
+  
   const handleFilterChange = useCallback((filters: ClaimsFilterValues) => {
     setParams((prev) => ({ ...prev, ...filters, page: 1 }));
   }, []);
@@ -43,27 +40,24 @@ export default function ClaimsView() {
   const showTable = !loading && !error && data.items.length > 0;
 
   return (
-    <div className="flex flex-col flex-1 mx-5 my-5 gap-4">
-      {/* Filters — outside and above the white card */}
+    <div className="flex flex-col flex-1 min-h-0 mx-5 my-5 gap-4">
+      {/* Filters — shrinks to its natural height, never grows */}
       <ClaimsFilters onChange={handleFilterChange} />
 
-      {/* Table Card */}
-      <div className="bg-white rounded-xl shadow-sm flex flex-col p-4 flex-1">
-        {/*
-          The content area always occupies flex-1 regardless of state
-          (loading / empty / error / data), so the Pagination below never
-          shifts position.
-        */}
+      {/* Table Card — takes all remaining vertical space, clips overflow */}
+      <div className="bg-white rounded-xl shadow-sm flex flex-col flex-1 min-h-0 overflow-hidden">
 
-        {/* Count will replace with actual */}
-        <p className="text-sm text-gray-600 mb-3">
+        {/* Row count label — pinned, never scrolls */}
+        <p className="text-sm text-gray-600 mb-3 m-4 shrink-0">
           Showing <span className="font-semibold text-black">{start}</span>
           <span className="font-semibold text-black">{"-"}</span>
           <span className="font-semibold text-black">{end}</span> of{" "}
           <span className="font-semibold text-black">{totalCount}</span>{" "}
           claims
         </p>
-        <div className="flex-1 min-h-0 overflow-auto">
+
+        {/* Scroll zone — only this region scrolls */}
+        <div className="flex-1 min-h-0 overflow-y-auto">
           {loading && <ClaimsTableSkeleton />}
 
           {error && <ClaimsErrorState message={error} onRetry={retry} />}
@@ -73,7 +67,7 @@ export default function ClaimsView() {
           {showTable && <ClaimsTable data={data.items} />}
         </div>
 
-        {/* Pagination — always anchored to bottom of card, never shifts */}
+        {/* Pagination — pinned to the bottom of the card, never scrolls */}
         <Pagination
           page={params.page}
           total={data.totalPages}

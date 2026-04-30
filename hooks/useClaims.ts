@@ -1,64 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import type { ClaimItem, UseClaimsData, UseClaimsParams } from "@/types/claims";
+import ALL_CLAIMS from "@/data/claims.json";
 
 export type { ClaimItem, UseClaimsData, UseClaimsParams };
-
-const ALL_CLAIMS: ClaimItem[] = [
-  {
-    id: "CLM-2839145",
-    sccfNumber: "20114603",
-    employerGroup: "Microsoft",
-    lob: "BC Home",
-    dateReceived: "Apr 22, 2026",
-    status: "Complete",
-    automation: 80,
-  },
-  {
-    id: "CLM-2839215",
-    sccfNumber: "20114692",
-    employerGroup: "Alaska Air Group",
-    lob: "BC Home",
-    dateReceived: "Apr 21, 2026",
-    status: "Complete",
-    automation: 55,
-  },
-  {
-    id: "CLM-2839263",
-    sccfNumber: "20114744",
-    employerGroup: "LifeWise of Washington",
-    lob: "Shared Admin",
-    dateReceived: "Apr 21, 2026",
-    status: "Complete",
-    automation: 90,
-  },
-  {
-    id: "CLM-2839288",
-    sccfNumber: "20114782",
-    employerGroup: "Amazon",
-    lob: "BC Home",
-    dateReceived: "Apr 20, 2026",
-    status: "Complete",
-    automation: 40,
-  },
-  {
-    id: "CLM-2839322",
-    sccfNumber: "20114836",
-    employerGroup: "Expedia",
-    lob: "BC Home",
-    dateReceived: "Apr 20, 2026",
-    status: "Active",
-    automation: 70,
-  },
-  {
-    id: "CLM-2839378",
-    sccfNumber: "20114895",
-    employerGroup: "LEOFF Health and Welfare Trust",
-    lob: "Host",
-    dateReceived: "Apr 20, 2026",
-    status: "Active",
-    automation: 60,
-  },
-];
 
 export const useClaims = (params: UseClaimsParams) => {
   const paramsJSON = JSON.stringify(params);

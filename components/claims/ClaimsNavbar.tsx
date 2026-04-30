@@ -8,7 +8,7 @@ export default function ClaimsNavbar() {
   const [active, setActive] = useState("List");
 
   return (
-    <div className="w-full bg-white px-4 py-3 sm:px-6 border-b">
+    <div className="w-full bg-white px-4 py-3 border-gray-300 sm:px-6 border-b">
       <div className="flex flex-row items-center justify-between">
 
         {/* Left: Title */}
