@@ -11,6 +11,9 @@ export type ClaimItem = {
 export type UseClaimsData = {
   items: ClaimItem[];
   totalPages: number;
+  totalCount: number;
+  page: number;
+  pageSize: number;
 };
 
 export type UseClaimsParams = {
