@@ -1,12 +1,14 @@
-"use client";
+import { Progress } from "antd";
 
 export default function AutomationBar({ value }: { value: number }) {
   return (
-    <div className="w-full bg-orange-200 h-2 rounded-sm overflow-hidden">
-      <div
-        className="bg-blue-200 h-2"
-        style={{ width: `${value}%` }}
-      />
-    </div>
+    <Progress
+      percent={value}
+      showInfo={false}
+      size={{ height: 8 }}
+      strokeColor="#bfdbfe"
+      trailColor="#fed7aa"
+      style={{ margin: 0 }}
+    />
   );
 }
