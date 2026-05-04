@@ -1,44 +1,62 @@
-"use client";
-
 import { useState } from "react";
+import { Layout } from "antd";
 
-const tabs = ["List", "View", "Complete"];
+const TABS = ["List", "View", "Complete"];
 
 export default function ClaimsNavbar() {
   const [active, setActive] = useState("List");
 
   return (
-    <div className="w-full bg-white px-4 py-3 border-gray-300 sm:px-6 border-b">
-      <div className="flex flex-row items-center justify-between">
+    <Layout.Header
+      style={{
+        background: "#fff",
+        borderBottom: "1px solid #e5e7eb",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "0 24px",
+        height: 56,
+        lineHeight: "56px",
+      }}
+    >
+      <span style={{ fontSize: 18, fontWeight: 600, color: "#0f172a" }}>
+        Claims Adjudication
+      </span>
 
-        {/* Left: Title */}
-        <div className="text-xl font-semibold text-slate-900">
-          Claims Adjudication
-        </div>
-
-        {/* Right: Tabs — shared gray container, active tab is blue pill */}
-        <div className="inline-flex items-center bg-gray-100 rounded-lg p-1 gap-0.5">
-          {tabs.map((tab) => {
-            const isActive = active === tab;
-
-            return (
-              <button
-                key={tab}
-                onClick={() => setActive(tab)}
-                className={`
-                  px-4 py-1.5 text-sm font-medium rounded-md transition-all
-                  ${isActive
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "text-gray-600 hover:text-gray-800"}
-                `}
-              >
-                {tab}
-              </button>
-            );
-          })}
-        </div>
-
+      <div
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          background: "#f3f4f6",
+          borderRadius: 8,
+          padding: 4,
+          gap: 2,
+        }}
+      >
+        {TABS.map((tab) => {
+          const isActive = active === tab;
+          return (
+            <button
+              key={tab}
+              onClick={() => setActive(tab)}
+              style={{
+                padding: "6px 16px",
+                fontSize: 14,
+                fontWeight: 500,
+                cursor: "pointer",
+                border: "none",
+                borderRadius: 6,
+                background: isActive ? "#2563eb" : "transparent",
+                color: isActive ? "#fff" : "#4b5563",
+                transition: "all 0.15s",
+                boxShadow: isActive ? "0 1px 2px rgba(0,0,0,0.15)" : "none",
+              }}
+            >
+              {tab}
+            </button>
+          );
+        })}
       </div>
-    </div>
+    </Layout.Header>
   );
 }
