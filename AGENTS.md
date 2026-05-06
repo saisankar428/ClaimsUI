@@ -1,5 +1,3 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+# ClaimsUI — Agent Guidelines
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
+This project uses **React 19 + Vite + Ant Design v5**. Read the Ant Design v5 docs and Vite docs before writing any code. Note that Ant Design v5 uses CSS-in-JS and has breaking changes from v4 — do not import `antd/dist/reset.css` or use v4 APIs.
