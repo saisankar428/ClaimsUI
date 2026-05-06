@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
-import { SortKey, SortDir } from "@/constants/claims";
-import { ClaimItem } from "@/types/claims";
-import { nextSortDir, sortClaims } from "@/lib/claimsSort";
+import { ClaimItem } from "@/src/types/claims";
+import { nextSortDir, sortClaims } from "@/src/lib/claimsSort";
+import { SortDir, SortKey } from "../constants/claims";
 
 interface UseClaimsSortReturn {
   sorted: ClaimItem[];

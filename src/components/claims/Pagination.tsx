@@ -1,12 +1,14 @@
 import { Button, Select, Space } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { ROWS_PER_PAGE_OPTIONS } from "@/constants/claims";
+import { ROWS_PER_PAGE_OPTIONS } from "@/src/constants/claims";
 
 type Props = {
   page: number;
   total: number;
+  // eslint-disable-next-line no-unused-vars
   onChange: (page: number) => void;
   rowsPerPage?: number;
+  // eslint-disable-next-line no-unused-vars
   onRowsPerPageChange?: (rows: number) => void;
 };
 
@@ -41,7 +43,6 @@ export default function Pagination({
         alignItems: "center",
         justifyContent: "space-between",
         padding: "12px 16px",
-        borderTop: "1px solid #f0f0f0",
       }}
     >
       <Space size="small">

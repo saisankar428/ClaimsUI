@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import type { ClaimItem, UseClaimsData, UseClaimsParams } from "@/types/claims";
-import ALL_CLAIMS from "@/data/claims.json";
+import type { ClaimItem, UseClaimsData, UseClaimsParams } from "@/src/types/claims";
+import ALL_CLAIMS from "../data/claims.json";
 
 export type { ClaimItem, UseClaimsData, UseClaimsParams };
 

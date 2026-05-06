@@ -1,4 +1,4 @@
-import { ClaimItem } from "@/types/claims";
+import { ClaimItem } from "@/src/types/claims";
 
 export const LOB_OPTIONS = [
   { value: "", label: "All LOBs" },

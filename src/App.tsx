@@ -1,7 +1,9 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ConfigProvider, theme } from "antd";
 import ErrorBoundary from "./ErrorBoundary";
-import ClaimsPage from "@/components/claims/ClaimsPage";
+import { ClaimsPage } from "./components/claims";
+import ViewPage from "./components/claims/ViewPage";
+import CompletePage from "./components/claims/CompletePage";
 
 export default function App() {
   return (
@@ -9,9 +11,16 @@ export default function App() {
       <ErrorBoundary>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Navigate to="/claims" replace />} />
-            <Route path="/claims" element={<ClaimsPage />} />
-            <Route path="*" element={<Navigate to="/claims" replace />} />
+            {/* Default route */}
+            <Route path="/" element={<Navigate to="/list" replace />} />
+
+            {/* Pages */}
+            <Route path="/list" element={<ClaimsPage />} />
+            <Route path="/view" element={<ViewPage />} />
+            <Route path="/complete" element={<CompletePage />} />
+
+            {/* Fallback */}
+            <Route path="*" element={<Navigate to="/list" replace />} />
           </Routes>
         </BrowserRouter>
       </ErrorBoundary>

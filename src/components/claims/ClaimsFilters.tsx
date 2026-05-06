@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Input, Select, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import type { ClaimsFilterValues } from "@/types/claims";
-import { LOB_OPTIONS } from "@/constants/claims";
+import type { ClaimsFilterValues } from "@/src/types/claims";
+import { LOB_OPTIONS } from "@/src/constants/claims";
 
 type Props = {
+  // eslint-disable-next-line no-unused-vars
   onChange: (filters: ClaimsFilterValues) => void;
 };
 

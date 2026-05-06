@@ -1,4 +1,4 @@
-import { SortKey } from "@/constants/claims"
+import { SortKey } from "./claims";
 
 export interface Column {
   label: string;

@@ -1,12 +1,13 @@
 import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { ClaimItem } from "@/types/claims";
-import { SortKey } from "@/constants/claims";
-import { CLAIMS_COLUMNS } from "@/constants/claimsColumns";
-import { useClaimsSort } from "@/hooks/useClaimsSort";
+import { ClaimItem } from "@/src/types/claims";
+import { useClaimsSort } from "@/src/hooks/useClaimsSort";
 import StatusBadge from "./StatusBadge";
 import AutomationBar from "./AutomationBar";
 import ClaimsEmptyState from "./ClaimsEmptyState";
+import { useNavigate } from "react-router-dom";
+import { SortKey } from "@/src/constants/claims";
+import { CLAIMS_COLUMNS } from "@/src/constants/claimsColumns";
 
 interface Props {
   data: ClaimItem[];
@@ -83,6 +84,7 @@ function SortIcon({
 
 export default function ClaimsTable({ data }: Props) {
   const { sorted, sortKey, sortDir, handleSort } = useClaimsSort(data);
+  const navigate = useNavigate();
 
   const columns: ColumnsType<ClaimItem> = CLAIMS_COLUMNS.map(({ label, key }) => ({
     title: (
@@ -124,6 +126,10 @@ export default function ClaimsTable({ data }: Props) {
       size="small"
       scroll={{ x: true }}
       showSorterTooltip={false}
+      onRow={(record) => ({
+        onClick: () => navigate("/view", { state: { claim: record } }),
+        style: { cursor: "pointer" },
+      })}
     />
   );
 }

@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
 import { Card, Skeleton, Typography } from "antd";
-import ClaimsFilters from "@/components/claims/ClaimsFilters";
-import Pagination from "@/components/claims/Pagination";
-import ClaimsErrorState from "@/components/claims/ClaimsErrorState";
-import { useClaims } from "@/hooks/useClaims";
-import type { UseClaimsParams, ClaimsFilterValues } from "@/types/claims";
+import { useClaims } from "@/src/hooks/useClaims";
+import type { UseClaimsParams, ClaimsFilterValues } from "@/src/types/claims";
 import ClaimsTable from "./ClaimsTable";
+import ClaimsFilters from "./ClaimsFilters";
+import ClaimsErrorState from "./ClaimsErrorState";
+import Pagination from "./Pagination";
 
 export default function ClaimsView() {
   const [params, setParams] = useState<UseClaimsParams>({
@@ -18,6 +18,7 @@ export default function ClaimsView() {
 
   const { data, loading, error, retry } = useClaims(params);
   const { totalCount, page, pageSize } = data;
+
   const start = totalCount === 0 ? 0 : (page - 1) * pageSize + 1;
   const end = Math.min(page * pageSize, totalCount);
 
@@ -38,21 +39,22 @@ export default function ClaimsView() {
       style={{
         display: "flex",
         flexDirection: "column",
-        flex: 1,
-        minHeight: 0,
+        height: "100%",
         margin: 20,
         gap: 16,
       }}
     >
+      {/* Filters */}
       <ClaimsFilters onChange={handleFilterChange} />
 
+      {/* Card */}
       <Card
         style={{
           display: "flex",
           flexDirection: "column",
           flex: 1,
           minHeight: 0,
-          overflow: "hidden",
+          marginBottom:50
         }}
         styles={{
           body: {
@@ -61,13 +63,14 @@ export default function ClaimsView() {
             flex: 1,
             minHeight: 0,
             padding: 0,
+            paddingLeft:5
           },
         }}
       >
+        {/* Header */}
         <Typography.Text
           style={{
-            padding: "12px 16px",
-            display: "block",
+            padding: "15px 10px",
             fontSize: 13,
             color: "#4b5563",
           }}
@@ -76,12 +79,21 @@ export default function ClaimsView() {
           <strong style={{ color: "#111827" }}>
             {start}–{end}
           </strong>{" "}
-          of <strong style={{ color: "#111827" }}>{totalCount}</strong> claims
+          of{" "}
+          <strong style={{ color: "#111827" }}>
+            {totalCount}
+          </strong>{" "}
+          claims
         </Typography.Text>
 
-        {/* Scroll zone — skeleton replaces the table while loading so stale row counts
-            are never visible during the 300 ms fetch delay */}
-        <div style={{ flex: 1, minHeight: 0, overflowY: "auto" }}>
+        {/* ONLY THIS AREA SCROLLS */}
+        <div
+          style={{
+            flex: 1,
+            minHeight: 0,
+            overflowY: "auto",
+          }}
+        >
           {loading ? (
             <Skeleton
               active
@@ -95,13 +107,22 @@ export default function ClaimsView() {
           )}
         </div>
 
-        <Pagination
-          page={params.page}
-          total={data.totalPages}
-          rowsPerPage={params.limit}
-          onChange={handlePageChange}
-          onRowsPerPageChange={handleRowsPerPageChange}
-        />
+        {/* FIXED PAGINATION */}
+        <div
+          style={{
+            borderTop: "1px solid #f0f0f0",
+            padding: "12px 16px",
+            background: "#fff",
+          }}
+        >
+          <Pagination
+            page={params.page}
+            total={data.totalPages}
+            rowsPerPage={params.limit}
+            onChange={handlePageChange}
+            onRowsPerPageChange={handleRowsPerPageChange}
+          />
+        </div>
       </Card>
     </div>
   );

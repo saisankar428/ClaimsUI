@@ -19,9 +19,9 @@
   "include": [
     "src",
     "components",
-    "hooks",
-    "lib",
-    "types",
+    "src/hooks",
+    "src/lib",
+    "src/types",
     "constants",
     "vite.config.ts"
   ],

@@ -1,5 +1,5 @@
-import { SortKey, SortDir } from "@/constants/claims";
-import { ClaimItem } from "@/types/claims";
+import { ClaimItem } from "@/src/types/claims";
+import { SortDir, SortKey } from "../constants/claims";
 
 
 const STATUS_ORDER: Record<string, number> = {

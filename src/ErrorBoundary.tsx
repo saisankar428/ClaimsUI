@@ -17,6 +17,7 @@ export default class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
+    // eslint-disable-next-line no-undef
     console.error("Uncaught error:", error, info);
   }
 
